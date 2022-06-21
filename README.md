@@ -1,0 +1,1 @@
+# pokemon-api-rest-template
