@@ -1,9 +1,26 @@
 package br.pokemonapi.model;
 
-import lombok.Data;
+import static lombok.AccessLevel.PRIVATE;
 
-@Data
+import javax.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
+
+@Value
+@Builder
+@AllArgsConstructor(access = PRIVATE)
 public class Moves {
-    private Move move;
+
+    String name;
+
+    public static class MovesBuilder {
+
+        public Moves build() {
+
+            return new Moves(this.name);
+        }
+    }
+
 
 }

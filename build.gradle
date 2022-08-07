@@ -1,4 +1,5 @@
 plugins {
+	id "io.freefair.lombok" version "6.0.0-m2"
 	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
@@ -7,6 +8,7 @@ plugins {
 group = 'br.pokemon-api'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+compileJava.options.encoding = 'UTF-8'
 
 configurations {
 	compileOnly {
@@ -18,17 +20,14 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
-	implementation 'io.springfox:springfox-swagger2:3.0.0'
-	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+springBoot {
+	buildInfo()
 }
 
-tasks.named('test') {
+apply from: "dependencies.gradle"
+
+test {
+	systemProperty "user.language", "en"
+	systemProperty "user.country", "US"
 	useJUnitPlatform()
 }
