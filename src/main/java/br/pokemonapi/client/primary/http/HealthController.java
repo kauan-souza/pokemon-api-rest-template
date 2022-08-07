@@ -1,4 +1,4 @@
-package br.pokemonapi.controller;
+package br.pokemonapi.client.primary.http;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
