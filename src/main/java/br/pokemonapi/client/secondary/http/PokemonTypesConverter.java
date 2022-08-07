@@ -1,11 +1,12 @@
 package br.pokemonapi.client.secondary.http;
 
-import br.pokemonapi.model.Types;
+import br.pokemonapi.model.Type;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class PokemonTypesConverter implements Function<TypeResponse, Types> {
+public class PokemonTypesConverter implements Function<Collection<TypesResponse>, Collection<Type>> {
 
     private static PokemonTypesConverter instance;
 
@@ -19,23 +20,26 @@ public class PokemonTypesConverter implements Function<TypeResponse, Types> {
     }
 
     @Override
-    public Types apply(TypeResponse response) {
+    public Collection<Type> apply(Collection<TypesResponse> response) {
 
         return Optional.ofNullable(response)
-            .map(PokemonTypesConverter::convert)
+            .map(PokemonTypesConverter::convertTypes)
             .orElseThrow(() ->
                 new RuntimeException("Não foi possível converter o reponse para a entidade")
             );
 
     }
 
-    private static Types convert(TypeResponse response) {
+    private static Collection<Type> convertTypes(Collection<TypesResponse> response) {
 
-        return Types
-            .valueOf(
-                response
-                    .getName()
-                    .toLowerCase()
-            );
+        return response
+            .stream()
+            .map(PokemonTypesConverter::convertType)
+            .toList();
+    }
+
+    private static Type convertType(TypesResponse response) {
+
+        return Type.fromDescricao(response.getType().getName());
     }
 }

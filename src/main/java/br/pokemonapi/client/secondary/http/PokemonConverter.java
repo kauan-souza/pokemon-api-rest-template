@@ -2,7 +2,7 @@ package br.pokemonapi.client.secondary.http;
 
 import br.pokemonapi.model.Moves;
 import br.pokemonapi.model.Pokemon;
-import br.pokemonapi.model.Types;
+import br.pokemonapi.model.Type;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
@@ -42,19 +42,14 @@ public class PokemonConverter implements Function<PokemonResponse, Pokemon> {
             .active(true)
             .external(true)
             .types(convertTypes(response.getTypes()))
-            .moves(convertMoves(response.getMoves()))
             .build();
     }
 
-    private static Collection<Types> convertTypes(Collection<TypesResponse> response) {
+    private static Collection<Type> convertTypes(Collection<TypesResponse> response) {
 
-        return response
-            .stream()
-            .map(typesResponse ->
-                PokemonTypesConverter
-                    .getInstance()
-                    .apply(typesResponse.getType()))
-            .toList();
+        return PokemonTypesConverter
+            .getInstance()
+            .apply(response);
     }
 
     private static Collection<Moves> convertMoves(Collection<MovesResponse> response) {

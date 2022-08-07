@@ -3,7 +3,7 @@ package br.pokemonapi.model;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.util.Collection;
-import javax.persistence.Embedded;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,34 +11,36 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Getter;
 
 @Entity
 @Table(schema = "pokemon")
-@Value
+@Getter
 @Builder
 @AllArgsConstructor(access = PRIVATE)
 public class Pokemon {
 
+    protected Pokemon() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    private Long id;
 
-    Integer height;
+    private Integer height;
 
-    Integer weight;
+    private Integer weight;
 
-    String name;
+    private String name;
 
-    boolean active;
+    private boolean active;
 
-    boolean external;
+    private boolean external;
 
-    @Embedded
-    Collection<Types> types;
+    @Convert(converter = TypePersistenceConverter.class)
+    Collection<Type> types;
 
-    @Embedded
-    Collection<Moves> moves;
+//    Collection<Moves> moves;
 
     public static class PokemonBuilder {
 
@@ -51,8 +53,7 @@ public class Pokemon {
                 this.name,
                 this.active,
                 this.external,
-                this.types,
-                this.moves);
+                this.types);
         }
     }
 }

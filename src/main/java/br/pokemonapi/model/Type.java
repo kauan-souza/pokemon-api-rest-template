@@ -2,14 +2,13 @@ package br.pokemonapi.model;
 
 import static lombok.AccessLevel.PRIVATE;
 
-import javax.persistence.Embeddable;
+import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Embeddable
 @Getter
 @AllArgsConstructor(access = PRIVATE)
-public enum Types {
+public enum Type {
 
     NORMAL("normal"),
     FLYING("flying"),
@@ -31,5 +30,17 @@ public enum Types {
     UNKNOW("unknow"),
     FIGHTING("fighting");
 
-    final String descricao;
+    final String description;
+
+    public static Type fromDescricao(String value) {
+        return Arrays.stream(Type.values())
+            .filter(types -> existeEnum(types, value))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Tipo informado não encontrado"));
+    }
+
+    private static boolean existeEnum(Type type, String value) {
+
+        return type.getDescription().equals(value);
+    }
 }
