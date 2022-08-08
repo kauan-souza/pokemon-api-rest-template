@@ -1,11 +1,12 @@
 package br.pokemonapi.client.secondary.http;
 
-import br.pokemonapi.model.Moves;
+import br.pokemonapi.model.Move;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class PokemonMovesConverter implements Function<MoveResponse, Moves> {
+public class PokemonMovesConverter implements Function<Collection<MovesResponse>, Collection<Move>> {
 
     private static PokemonMovesConverter instance;
 
@@ -19,20 +20,28 @@ public class PokemonMovesConverter implements Function<MoveResponse, Moves> {
     }
 
     @Override
-    public Moves apply(MoveResponse response) {
+    public Collection<Move> apply(Collection<MovesResponse> response) {
 
         return Optional.ofNullable(response)
-            .map(PokemonMovesConverter::convert)
+            .map(PokemonMovesConverter::convertMoves)
             .orElseThrow(() ->
                 new RuntimeException("Não foi possível converter o reponse para a entidade"));
 
     }
 
-    private static Moves convert(MoveResponse response) {
+    private static Collection<Move> convertMoves(Collection<MovesResponse> response) {
 
-        return Moves
+        return response
+            .stream()
+            .map(PokemonMovesConverter::convertMove)
+            .toList();
+    }
+
+    private static Move convertMove(MovesResponse response) {
+
+        return Move
             .builder()
-            .name(response.getName())
+            .name(response.getMove().getName())
             .build();
     }
 }

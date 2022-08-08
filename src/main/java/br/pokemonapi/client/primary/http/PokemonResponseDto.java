@@ -22,4 +22,6 @@ class PokemonResponseDto {
 
     Collection<String> types;
 
+    Collection<String> moves;
+
 }

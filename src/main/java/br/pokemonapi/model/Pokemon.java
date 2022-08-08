@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,7 +43,21 @@ public class Pokemon {
     @Convert(converter = TypePersistenceConverter.class)
     Collection<Type> types;
 
-//    Collection<Moves> moves;
+    @ManyToMany
+    @JoinTable(
+        name = "pokemon_move",
+        schema = "pokemon",
+        joinColumns = {
+            @JoinColumn(
+                name = "pokemon_id",
+                referencedColumnName = "id"),
+        },
+        inverseJoinColumns = {
+            @JoinColumn(
+                name = "move_id",
+                referencedColumnName = "id")
+        })
+    Collection<Move> moves;
 
     public static class PokemonBuilder {
 
@@ -53,7 +70,8 @@ public class Pokemon {
                 this.name,
                 this.active,
                 this.external,
-                this.types);
+                this.types,
+                this.moves);
         }
     }
 }
