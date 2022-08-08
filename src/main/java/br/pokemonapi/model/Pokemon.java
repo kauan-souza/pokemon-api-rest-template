@@ -3,13 +3,13 @@ package br.pokemonapi.model;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.util.Collection;
-import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -43,7 +43,20 @@ public class Pokemon {
     @Convert(converter = TypePersistenceConverter.class)
     Collection<Type> types;
 
-    @ManyToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+        name = "pokemon_move",
+        schema = "pokemon",
+        joinColumns = {
+            @JoinColumn(
+                name = "pokemon_id",
+                referencedColumnName = "id"),
+        },
+        inverseJoinColumns = {
+            @JoinColumn(
+                name = "move_id",
+                referencedColumnName = "id")
+        })
     Collection<Move> moves;
 
     public static class PokemonBuilder {
