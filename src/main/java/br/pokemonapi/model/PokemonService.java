@@ -3,6 +3,7 @@ package br.pokemonapi.model;
 import static java.lang.String.format;
 
 import br.pokemonapi.client.secondary.http.PokemonApiClient;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,16 @@ public class PokemonService {
     private final PokemonRepository pokemonRepository;
     private final PokemonApiClient pokemonApiClient;
 
+    public Pokemon save(Pokemon pokemon) {
+        Optional<Pokemon> pokemon1 = pokemonRepository.findById(pokemon.getId());
+
+        if (pokemon1.isPresent()) {
+
+            pokemon1.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        }
+        return pokemonRepository.saveAndFlush(pokemon);
+    }
+
     public Pokemon findById(Long id) {
 
         try {
@@ -26,7 +37,6 @@ public class PokemonService {
         }
     }
 
-
     public Pokemon findByName(String name) {
         try {
             return findByNameExternal(name);
@@ -37,22 +47,13 @@ public class PokemonService {
         }
     }
 
-    private Pokemon findByNameExternal(String name) {
+    public void logicDelete(Long id) {
 
-        return this
-            .pokemonApiClient
-            .findByName(name);
+        findByIdExternal(id);
+
+        save(findByIdInternal(id)
+            .disableActive());
     }
-
-    private Pokemon findByNameInternal(String name) {
-
-        return pokemonRepository
-            .findByName(name)
-            .orElseThrow(() -> new HttpClientErrorException(
-                HttpStatus.NOT_FOUND,
-                format("Nenhum pokemon encontrado para o id informado: {%s}", name)));
-    }
-
 
     private Pokemon findByIdExternal(Long id) {
 
@@ -70,16 +71,19 @@ public class PokemonService {
                 format("Nenhum pokemon encontrado para o id informado: {%s}", id)));
     }
 
-    public void logicDelete(Long id) {
+    private Pokemon findByNameExternal(String name) {
 
-        findByIdExternal(id);
-
-        save(findByIdInternal(id)
-            .disableActive());
+        return this
+            .pokemonApiClient
+            .findByName(name);
     }
 
-    public Pokemon save(Pokemon pokemon) {
+    private Pokemon findByNameInternal(String name) {
 
-        return pokemonRepository.saveAndFlush(pokemon);
+        return pokemonRepository
+            .findByName(name)
+            .orElseThrow(() -> new HttpClientErrorException(
+                HttpStatus.NOT_FOUND,
+                format("Nenhum pokemon encontrado para o id informado: {%s}", name)));
     }
 }
