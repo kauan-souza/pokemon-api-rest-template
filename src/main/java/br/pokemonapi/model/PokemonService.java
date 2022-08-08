@@ -26,6 +26,7 @@ public class PokemonService {
         }
     }
 
+
     private Pokemon findByIdExternal(Long id) {
 
         return this
@@ -42,4 +43,16 @@ public class PokemonService {
                 format("Nenhum pokemon encontrado para o id informado: {%s}", id)));
     }
 
+    public void logicDelete(Long id) {
+
+        findByIdExternal(id);
+
+        save(findByIdInternal(id)
+            .disableActive());
+    }
+
+    public Pokemon save(Pokemon pokemon) {
+
+        return pokemonRepository.saveAndFlush(pokemon);
+    }
 }

@@ -16,4 +16,12 @@ public class PokemonApplicationServiceImpl implements PokemonApplicationService 
 
         return pokemonService.findById(id);
     }
+
+    @Override
+    public void logicDelete(Long id) {
+
+        pokemonService.logicDelete(id);
+    }
+
+
 }

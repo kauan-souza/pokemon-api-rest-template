@@ -4,9 +4,12 @@ import static org.springframework.http.HttpStatus.OK;
 
 import br.pokemonapi.application.PokemonApplicationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,15 +34,16 @@ public class PokemonController {
             );
     }
 
-//    @PostMapping
-//    public ResponseEntity<Pokemon> save(@RequestBody Pokemon pokemon) {
-//
-//        return ResponseEntity.ok(pokemonService.save(pokemon));
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Pokemon> logicDelete(@PathVariable("id") long id) {
-//
-//        return ResponseEntity.ok(pokemonService.EditIsActive(id));
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<String> logicDelete(@PathVariable("id") long id) {
+        try {
+            pokemonApplicationService.logicDelete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
+
+
+
