@@ -34,6 +34,17 @@ public class PokemonController {
             );
     }
 
+    @GetMapping("/name/{name}")
+    @ResponseStatus(OK)
+    public PokemonResponseDto findByName(@PathVariable("name") String name) {
+
+        return mapper
+            .mapToResponse(this
+                .pokemonApplicationService
+                .findByName(name)
+            );
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<String> logicDelete(@PathVariable("id") long id) {
         try {

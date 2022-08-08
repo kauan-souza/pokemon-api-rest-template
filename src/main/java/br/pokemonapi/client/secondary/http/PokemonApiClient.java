@@ -30,11 +30,14 @@ public class PokemonApiClient {
             );
     }
 
-    public PokemonResponse findByName(String name) {
+    public Pokemon findByName(String name) {
 
-        return this
-            .restTemplate
-            .getForObject(buildUrl(name), PokemonResponse.class);
+        return PokemonConverter
+            .getInstance()
+            .apply(this
+                .restTemplate
+                .getForObject(buildUrl(name), PokemonResponse.class)
+            );
     }
 
     private <T> String buildUrl(T value) {

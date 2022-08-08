@@ -18,6 +18,11 @@ public class PokemonApplicationServiceImpl implements PokemonApplicationService 
     }
 
     @Override
+    public Pokemon findByName(String name) {
+        return pokemonService.findByName(name);
+    }
+
+    @Override
     public void logicDelete(Long id) {
 
         pokemonService.logicDelete(id);
