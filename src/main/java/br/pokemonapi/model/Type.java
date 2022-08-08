@@ -21,13 +21,13 @@ public enum Type {
     FIRE("fire"),
     WATER("water"),
     GRASS("grass"),
-    ELETRIC("eletric"),
+    ELECTRIC("electric"),
     PSYCHIC("psychic"),
     ICE("ice"),
     DRAGON("dragon"),
     DARK("dark"),
     FAIRY("fairy"),
-    UNKNOW("unknow"),
+    UNKNOWN("unknown"),
     FIGHTING("fighting");
 
     final String description;

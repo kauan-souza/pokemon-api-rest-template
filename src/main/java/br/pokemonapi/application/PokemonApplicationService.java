@@ -7,4 +7,6 @@ public interface PokemonApplicationService {
     Pokemon findById(Long id);
 
     void logicDelete(Long id);
+
+    Pokemon findByName(String name);
 }

@@ -27,6 +27,33 @@ public class PokemonService {
     }
 
 
+    public Pokemon findByName(String name) {
+        try {
+            return findByNameExternal(name);
+
+        } catch (HttpClientErrorException exception) {
+
+            return findByNameInternal(name);
+        }
+    }
+
+    private Pokemon findByNameExternal(String name) {
+
+        return this
+            .pokemonApiClient
+            .findByName(name);
+    }
+
+    private Pokemon findByNameInternal(String name) {
+
+        return pokemonRepository
+            .findByName(name)
+            .orElseThrow(() -> new HttpClientErrorException(
+                HttpStatus.NOT_FOUND,
+                format("Nenhum pokemon encontrado para o id informado: {%s}", name)));
+    }
+
+
     private Pokemon findByIdExternal(Long id) {
 
         return this
