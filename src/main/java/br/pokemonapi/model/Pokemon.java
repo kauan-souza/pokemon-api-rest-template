@@ -73,5 +73,13 @@ public class Pokemon {
                 this.types,
                 this.moves);
         }
+
+    }
+
+    public Pokemon disableActive() {
+
+        this.active = false;
+
+        return this;
     }
 }
