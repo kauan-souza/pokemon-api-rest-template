@@ -2,7 +2,7 @@ package br.pokemonapi.client.secondary.http;
 
 import java.util.List;
 
-public class PokemonResponseFixture {
+public class PokemonResponseProvider {
 
     public static PokemonResponse build() {
 
@@ -12,7 +12,7 @@ public class PokemonResponseFixture {
             .name("Name")
             .height(123)
             .weight(123)
-            .types(List.of(TypesResponseFixture.build()))
+            .types(List.of(TypesResponseProvider.build()))
             .build();
     }
 

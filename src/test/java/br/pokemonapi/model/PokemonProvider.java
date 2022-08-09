@@ -5,7 +5,7 @@ import static lombok.AccessLevel.PRIVATE;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = PRIVATE)
-class PokemonFixture {
+class PokemonProvider {
 
     static Pokemon build() {
 

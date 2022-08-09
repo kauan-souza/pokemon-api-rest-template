@@ -17,12 +17,12 @@ public class PokemonService {
     private final PokemonApiClient pokemonApiClient;
 
     public Pokemon save(Pokemon pokemon) {
-        Optional<Pokemon> pokemon1 = pokemonRepository.findById(pokemon.getId());
-
-        if (pokemon1.isPresent()) {
-
-            pokemon1.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-        }
+//        Optional<Pokemon> pokemon1 = pokemonRepository.findById(pokemon.getId());
+//
+//        if (pokemon1.isPresent()) {
+//
+//            pokemon1.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+//        }
         return pokemonRepository.saveAndFlush(pokemon);
     }
 

@@ -24,7 +24,7 @@ class PokemonServiceTest {
     @DisplayName("Deve buscar Pokemon por id em api externa com sucesso")
     void deveBuscarPorId() {
 
-        var pokemon = PokemonFixture.build();
+        var pokemon = PokemonProvider.build();
     }
 
 }

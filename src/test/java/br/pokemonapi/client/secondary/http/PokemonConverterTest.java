@@ -11,7 +11,7 @@ class PokemonConverterTest {
     @DisplayName("Deve converter PokemonResponse para Pokemon com sucesso")
     void deveConverterComSucesso() {
 
-        var pokemonResponse = PokemonResponseFixture.build();
+        var pokemonResponse = PokemonResponseProvider.build();
 
         assertDoesNotThrow(() -> PokemonConverter.getInstance().apply(pokemonResponse));
     }
