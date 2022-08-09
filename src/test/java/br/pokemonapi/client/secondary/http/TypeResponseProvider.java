@@ -2,7 +2,7 @@ package br.pokemonapi.client.secondary.http;
 
 import br.pokemonapi.model.Type;
 
-public class TypeResponseFixture {
+public class TypeResponseProvider {
 
     public static TypeResponse build() {
 

@@ -9,4 +9,6 @@ public interface PokemonApplicationService {
     void logicDelete(Long id);
 
     Pokemon findByName(String name);
+
+    Pokemon save(Pokemon pokemon);
 }

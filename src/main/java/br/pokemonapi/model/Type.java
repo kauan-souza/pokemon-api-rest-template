@@ -34,12 +34,12 @@ public enum Type {
 
     public static Type fromDescricao(String value) {
         return Arrays.stream(Type.values())
-            .filter(types -> existeEnum(types, value))
+            .filter(types -> existsEnum(types, value))
             .findFirst()
-            .orElseThrow(() -> new RuntimeException("Tipo informado não encontrado"));
+            .orElseThrow(() -> new RuntimeException("Tipo informado não encontrado!"));
     }
 
-    private static boolean existeEnum(Type type, String value) {
+    private static boolean existsEnum(Type type, String value) {
 
         return type.getDescription().equals(value);
     }

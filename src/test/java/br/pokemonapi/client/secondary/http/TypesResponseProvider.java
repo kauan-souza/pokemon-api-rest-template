@@ -1,12 +1,12 @@
 package br.pokemonapi.client.secondary.http;
 
-public class TypesResponseFixture {
+public class TypesResponseProvider {
 
     public static TypesResponse build() {
 
         return TypesResponse
             .builder()
-            .type(TypeResponseFixture.build())
+            .type(TypeResponseProvider.build())
             .build();
     }
 
@@ -14,7 +14,7 @@ public class TypesResponseFixture {
 
         return TypesResponse
             .builder()
-            .type(TypeResponseFixture.buildInvalido())
+            .type(TypeResponseProvider.buildInvalido())
             .build();
     }
 

@@ -15,7 +15,7 @@ class PokemonTypeConverterTest {
     @DisplayName("Deve converter TypesResponse para Types com sucesso")
     void deveConverterComSucesso() {
 
-        var typeResponse = List.of(TypesResponseFixture.build());
+        var typeResponse = List.of(TypesResponseProvider.build());
 
         assertDoesNotThrow(() -> PokemonTypesConverter.getInstance().apply(typeResponse));
     }
@@ -24,7 +24,7 @@ class PokemonTypeConverterTest {
     @DisplayName("Deve lançar exceção ao converter PokemonResponse para Pokemon com valor inválido")
     void deveLancarExcecaoComValorInvalido() {
 
-        var pokemonResponse = List.of(TypesResponseFixture.buildInvalido());
+        var pokemonResponse = List.of(TypesResponseProvider.buildInvalido());
 
         Executable executable = () -> PokemonTypesConverter.getInstance().apply(pokemonResponse);
 
