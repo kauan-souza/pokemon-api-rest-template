@@ -27,8 +27,7 @@ public class PokemonConverter implements Function<PokemonResponse, Pokemon> {
         return Optional.ofNullable(response)
             .map(PokemonConverter::convert)
             .orElseThrow(() ->
-                new RuntimeException("Não foi possível converter o reponse para a entidade"));
-
+                new RuntimeException("Não foi possível converter o response para a entidade!"));
     }
 
     private static Pokemon convert(PokemonResponse response) {

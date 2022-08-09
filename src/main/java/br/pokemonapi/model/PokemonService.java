@@ -17,12 +17,12 @@ public class PokemonService {
     private final PokemonApiClient pokemonApiClient;
 
     public Pokemon save(Pokemon pokemon) {
-//        Optional<Pokemon> pokemon1 = pokemonRepository.findById(pokemon.getId());
-//
-//        if (pokemon1.isPresent()) {
-//
-//            pokemon1.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-//        }
+        Optional<Pokemon> pokemon1 = pokemonRepository.findById(pokemon.getId());
+
+        if (pokemon1.isPresent()) {
+
+            pokemon1.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        }
         return pokemonRepository.saveAndFlush(pokemon);
     }
 
@@ -68,7 +68,7 @@ public class PokemonService {
             .findById(id)
             .orElseThrow(() -> new HttpClientErrorException(
                 HttpStatus.NOT_FOUND,
-                format("Nenhum pokemon encontrado para o id informado: {%s}", id)));
+                format("Nenhum pokemon encontrado para o id informado: {%s}!", id)));
     }
 
     private Pokemon findByNameExternal(String name) {
@@ -84,6 +84,6 @@ public class PokemonService {
             .findByName(name)
             .orElseThrow(() -> new HttpClientErrorException(
                 HttpStatus.NOT_FOUND,
-                format("Nenhum pokemon encontrado para o id informado: {%s}", name)));
+                format("Nenhum pokemon encontrado para o nome informado: {%s}!", name)));
     }
 }

@@ -21,11 +21,11 @@ class TypePersistenceConverter implements AttributeConverter<Collection<Type>, S
             return null;
         }
 
-        Collection<String> partesList = new ArrayList<>();
+        Collection<String> collection = new ArrayList<>();
 
-        list.forEach(parte -> partesList.add(parte.toString()));
+        list.forEach(element -> collection.add(element.toString()));
 
-        return String.join(",", partesList);
+        return String.join(",", collection);
     }
 
     @Override
@@ -35,11 +35,11 @@ class TypePersistenceConverter implements AttributeConverter<Collection<Type>, S
             return Collections.emptyList();
         }
 
-        Collection<Type> partesCorpoAtingidas = new ArrayList<>();
+        Collection<Type> types = new ArrayList<>();
         Arrays.asList(joined.split(","))
-            .forEach(partes -> partesCorpoAtingidas.add(Type.valueOf(partes)));
+            .forEach(type -> types.add(Type.valueOf(type)));
 
-        return partesCorpoAtingidas;
+        return types;
     }
 
 

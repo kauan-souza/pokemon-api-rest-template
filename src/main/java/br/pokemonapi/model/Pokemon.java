@@ -22,8 +22,7 @@ import lombok.Getter;
 @AllArgsConstructor(access = PRIVATE)
 public class Pokemon {
 
-    protected Pokemon() {
-    }
+    protected Pokemon() {}
 
     @Id
     @Min(value = 906)

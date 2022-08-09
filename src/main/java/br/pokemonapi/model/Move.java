@@ -29,9 +29,7 @@ public class Move {
         }
     }
 
-    protected Move() {
-
-    }
+    protected Move() {}
 
     private Move(String name) {
         this.name = name;
