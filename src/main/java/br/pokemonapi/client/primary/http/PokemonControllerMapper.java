@@ -10,6 +10,8 @@ public interface PokemonControllerMapper {
 
     PokemonResponseDto mapToResponse(Pokemon pokemon);
 
+    Pokemon mapToEntity(PokemonRequestDto pokemonRequestDto);
+
     default Collection<String> mapToMoves(Collection<Move> moves) {
 
         return moves
@@ -18,4 +20,11 @@ public interface PokemonControllerMapper {
             .toList();
     }
 
+    default Collection<Move> mapToNameMoves(Collection<String> strings) {
+
+        return strings
+            .stream()
+            .map(string -> Move.builder().build())
+            .toList();
+    }
 }

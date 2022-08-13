@@ -30,7 +30,7 @@ class PokemonTypeConverterTest {
 
         var excecao = assertThrows(RuntimeException.class, executable);
 
-        assertEquals("Tipo informado não encontrado", excecao.getMessage());
+        assertEquals("Tipo informado não encontrado!", excecao.getMessage());
     }
 
 }

@@ -37,7 +37,7 @@ public class PokemonConverter implements Function<PokemonResponse, Pokemon> {
             .id(response.getId())
             .name(response.getName())
             .height(response.getHeight())
-            .weight(response.getHeight())
+            .weight(response.getWeight())
             .active(true)
             .external(true)
             .types(convertTypes(response.getTypes()))

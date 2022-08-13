@@ -10,5 +10,5 @@ public interface PokemonApplicationService {
 
     Pokemon findByName(String name);
 
-    Pokemon save(Pokemon pokemon);
+    Pokemon create(Pokemon pokemon);
 }

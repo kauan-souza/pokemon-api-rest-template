@@ -24,6 +24,12 @@ public class PokemonApplicationServiceImpl implements PokemonApplicationService 
     }
 
     @Override
+    public Pokemon create(Pokemon pokemon) {
+
+        return pokemonService.save(pokemon);
+    }
+
+    @Override
     public Pokemon findByName(String name) {
         return pokemonService.findByName(name);
     }
@@ -33,6 +39,5 @@ public class PokemonApplicationServiceImpl implements PokemonApplicationService 
 
         pokemonService.logicDelete(id);
     }
-
 
 }
