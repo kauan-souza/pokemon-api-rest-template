@@ -3,6 +3,8 @@ package br.pokemonapi.client.primary.http;
 import static org.springframework.http.HttpStatus.OK;
 
 import br.pokemonapi.application.PokemonApplicationService;
+import br.pokemonapi.model.Pokemon;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

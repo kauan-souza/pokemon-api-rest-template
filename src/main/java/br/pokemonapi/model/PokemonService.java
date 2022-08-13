@@ -17,6 +17,7 @@ public class PokemonService {
     private final PokemonApiClient pokemonApiClient;
 
     public Pokemon save(Pokemon pokemon) {
+
         Optional<Pokemon> pokemon1 = pokemonRepository.findByName(pokemon.getName());
 
         if (pokemon1.isPresent()) {
@@ -24,6 +25,7 @@ public class PokemonService {
            throw new RuntimeException();
         }
         return pokemonRepository.save(pokemon);
+      
     }
 
     public Pokemon findById(Long id) {
