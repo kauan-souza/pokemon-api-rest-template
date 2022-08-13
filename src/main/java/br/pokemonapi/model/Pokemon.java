@@ -3,6 +3,7 @@ package br.pokemonapi.model;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +23,8 @@ import lombok.Getter;
 @AllArgsConstructor(access = PRIVATE)
 public class Pokemon {
 
-    protected Pokemon() {}
+    protected Pokemon() {
+    }
 
     @Id
     @Min(value = 906)
@@ -41,20 +43,11 @@ public class Pokemon {
     @Convert(converter = TypePersistenceConverter.class)
     Collection<Type> types;
 
-    @ManyToMany
-    @JoinTable(
-        name = "pokemon_move",
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "pokemon_move",
         schema = "pokemon",
-        joinColumns = {
-            @JoinColumn(
-                name = "pokemon_id",
-                referencedColumnName = "id"),
-        },
-        inverseJoinColumns = {
-            @JoinColumn(
-                name = "move_id",
-                referencedColumnName = "id")
-        })
+        joinColumns = {@JoinColumn(name = "pokemon_id")},
+        inverseJoinColumns = {@JoinColumn(name = "move_id")})
     Collection<Move> moves;
 
     public static class PokemonBuilder {
@@ -71,7 +64,6 @@ public class Pokemon {
                 this.types,
                 this.moves);
         }
-
     }
 
     public Pokemon disableActive() {

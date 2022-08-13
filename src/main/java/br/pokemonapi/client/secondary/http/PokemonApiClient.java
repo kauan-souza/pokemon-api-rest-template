@@ -11,6 +11,7 @@ public class PokemonApiClient {
 
     private final RestTemplate restTemplate;
 
+
     @Value("${pokemon-external-api}")
     private String uri;
 

@@ -11,16 +11,16 @@ public class PokemonApplicationServiceImpl implements PokemonApplicationService 
 
     private final PokemonService pokemonService;
 
-
-    @Override
-    public Pokemon save(Pokemon pokemon) {
-        return pokemonService.save(pokemon);
-    }
-
     @Override
     public Pokemon findById(Long id) {
 
         return pokemonService.findById(id);
+    }
+
+    @Override
+    public Pokemon create(Pokemon pokemon) {
+
+        return pokemonService.save(pokemon);
     }
 
     @Override
@@ -33,6 +33,5 @@ public class PokemonApplicationServiceImpl implements PokemonApplicationService 
 
         pokemonService.logicDelete(id);
     }
-
 
 }
